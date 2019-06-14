@@ -7,22 +7,17 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Image, ScrollView, RefreshControl, Dimensions } from 'react-native';
+import {Platform, StyleSheet, View, Image, ScrollView, RefreshControl, Dimensions } from 'react-native';
 import MapboxGL from "@react-native-mapbox-gl/maps";
 import * as RNLocalize from "react-native-localize";
+import { Container, Button, Text } from 'native-base';
 import {translate, setI18nConfig} from './i18n';
 import i18n from './i18n';
-import { Examples } from '@shoutem/ui';
+import AppContainer from './navigator';
 
-export default class App extends Component<{}> {
-  render() {
-    return (
-      <Examples />
-    );
-  }
-}
+
 MapboxGL.setAccessToken("pk.eyJ1Ijoic291bHdyaXRlciIsImEiOiJjand1a3g3em0wMGl5NDhxdXhzcm1vbmJhIn0.vObzfKUO75-yZLQhydsksw");
-
+const win = Dimensions.get('window');
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android:
@@ -63,6 +58,8 @@ export class App2 extends Component<Props> {
       timeStr: getNowTimeStr(),
       name: 'Eric',
       unreadCount: 1000,
+      checked: false,
+      value: ''
     }
   }
   componentDidMount(){
@@ -99,6 +96,16 @@ export class App2 extends Component<Props> {
   _onReachBottom = () => {
 
   }
+  onSwitchChange = (nv) => {
+    this.setState({
+      checked: nv
+    })
+  }
+  onChange = (nv) => {
+    this.setState({
+      value: nv
+    })
+  }
 
   render() {
     const {list,timeStr,name, unreadCount} = this.state;
@@ -115,12 +122,17 @@ export class App2 extends Component<Props> {
             />
           }
         >
+         <Button>
+          <Text>
+            Button
+          </Text>
+        </Button>
           {this.state.refreshing && <Text>正在刷新。。。</Text>}
           {/* <Text>上次更新时间 : {timeStr}</Text>
           <Text>{list.length}个图片！</Text> */}
           {/* <Text style={styles.instructions}>{instructions}</Text> */}
           {/* <Text>{languageTag}</Text> */}
-          <Text style={styles.instructions}>MapBox 4 React Native Test</Text>
+          <Text style={styles.instructions}>MapBox 4 React Native Test9</Text>
           <View style={styles.mapContainer}>
             <MapboxGL.MapView style={styles.map} />
           </View>
@@ -164,7 +176,6 @@ export class App2 extends Component<Props> {
               value={RNLocalize.usesMetricSystem()}
             />
           </View>
-
           {list.map((i,idx) => {
             return <View key={idx} style={styles.imgItem}>
               <Text style={styles.imgItemIdx}>{idx+1}</Text>
@@ -177,7 +188,12 @@ export class App2 extends Component<Props> {
   }
 }
 //style
-const win = Dimensions.get('window');
+
+export default class App extends Component {
+  render() {
+    return <AppContainer />;
+  }
+}
 
 const styles = StyleSheet.create({
   scroll: {
