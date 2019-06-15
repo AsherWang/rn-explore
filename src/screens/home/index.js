@@ -8,35 +8,73 @@ const cards = [
   {
     text: '卡片1',
     name: 'One',
-    image: require('../../imgs/test.jpg'),
+    image: require('./test.jpg'),
   },
   {
     text: '卡片2',
     name: 'Two',
-    image: require('../../imgs/test.jpg'),
+    image: require('./test.jpg'),
   },
   {
     text: '卡片3',
     name: 'Three',
-    image: require('../../imgs/test.jpg'),
+    image: require('./test.jpg'),
   },
 ];
 
-type Props = {
-  navigation: Object
-}
-class HomeScreen extends Component<Props> {
+class HomeScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ret: 'init value',
+    };
+  }
+
+  // fetchSth: () => {
+  //   api.testApi()
+  //     .then((res) => {
+  //       console.log('res', res);
+  //     })
+  //     .catch((err) => {
+  //       console.log('fetch err', err);
+  //     });
+  // }
+
+  componentDidMount() {
+    this.fetchSth();
+  }
+
+  fetchSth() {
+    api.testApi()
+      .then((res) => {
+        console.log('res', res);
+        this.setState({
+          ret: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log('fetch err', err);
+      });
+  }
+
+  goMapBoxtest() {
+    // no better idea for now
+    // eslint-disable-next-line
+    this.props.navigate.navigate('MapBox');
+  }
+
   render() {
-    const { navigation } = this.props;
+    const { ret } = this.state;
     return (
       <Container>
         {/* <Header /> */}
         <View>
           <Button
             title="Go to MapBox"
-            onPress={() => navigation.navigate('MapBox')}
+            onPress={() => this.goMapBoxtest()}
           />
         </View>
+        <Text>{ret}</Text>
         <View>
           <DeckSwiper
             dataSource={cards}

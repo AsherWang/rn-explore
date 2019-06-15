@@ -12,7 +12,7 @@ export const translate = memoize(
 const translationGetters = {
   // lazy requires (metro bundler does not support symlinks)
   en: () => require('./en.json'),
-  // 'zh-CN': () => require("./zh-CN.json"),
+  'zh-CN': () => require('./zh-CN.json'),
   'zh-TW': () => require('./zh-TW.json'),
 };
 
@@ -29,7 +29,7 @@ export const setI18nConfig = () => {
   // update layout direction
   I18nManager.forceRTL(isRTL);
 
-  console.log('languageTag', languageTag);
+  // console.log('languageTag', languageTag);
 
   // set i18n-js config
   i18n.translations = { [languageTag]: translationGetters[languageTag]() };

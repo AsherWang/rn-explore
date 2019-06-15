@@ -1,5 +1,6 @@
 import { Dimensions } from 'react-native';
 import i18n, { translate, setI18nConfig } from './i18n';
+import api from './api';
 
 const { width, height } = Dimensions.get('window');
 
@@ -11,9 +12,10 @@ global.gScreen = {
   height,
 };
 
+global.api = api;
+
 global.i18n = {
   i18n,
   setI18nConfig,
 };
-
 global.$t = translate;
