@@ -1,32 +1,46 @@
 import React, { Component } from 'react';
-import { Image } from 'react-native';
-import { Container, Header, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Icon } from 'native-base';
+import { Image, Button } from 'react-native';
+import {
+  Container, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Icon,
+} from 'native-base';
+
 const cards = [
   {
-    text: 'Card One',
+    text: '卡片1',
     name: 'One',
     image: require('../../imgs/test.jpg'),
   },
   {
-    text: 'Card Two',
+    text: '卡片2',
     name: 'Two',
     image: require('../../imgs/test.jpg'),
   },
   {
-    text: 'Card Three',
+    text: '卡片3',
     name: 'Three',
     image: require('../../imgs/test.jpg'),
-  }
+  },
 ];
-class HomeScreen extends Component {
+
+type Props = {
+  navigation: Object
+}
+class HomeScreen extends Component<Props> {
   render() {
+    const { navigation } = this.props;
     return (
       <Container>
-        <Header />
+        {/* <Header /> */}
+        <View>
+          <Button
+            title="Go to MapBox"
+            onPress={() => navigation.navigate('MapBox')}
+          />
+        </View>
         <View>
           <DeckSwiper
             dataSource={cards}
-            renderItem={item =>
+            renderItem={item => (
               <Card style={{ elevation: 3 }}>
                 <CardItem>
                   <Left>
@@ -45,7 +59,7 @@ class HomeScreen extends Component {
                   <Text>{item.name}</Text>
                 </CardItem>
               </Card>
-            }
+            )}
           />
         </View>
       </Container>

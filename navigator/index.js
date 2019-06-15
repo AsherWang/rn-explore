@@ -1,19 +1,23 @@
-import React from "react";
-import { View, Text } from "react-native";
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+
 import HomeScreen from '../screens/home';
 import MapBoxScreen from '../screens/mapbox';
 
-
-const AppNavigator = createStackNavigator({
-  Home: {
-    screen: HomeScreen
+const AppNavigator = createStackNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
+      navigationOptions: () => ({
+        title: $t('hello'),
+        headerBackTitle: null,
+      }),
+    }, // width detailed config
+    MapBox: MapBoxScreen, // just view
   },
-  MapBox: MapBoxScreen
-},
-{
-  initialRouteName: "Home"
-}
+  {
+    initialRouteName: 'Home',
+  },
 );
+
 
 export default createAppContainer(AppNavigator);
