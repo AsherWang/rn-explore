@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Image, Button } from 'react-native';
 import {
   Container, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Icon,
 } from 'native-base';
+import { counterIncrementAsync } from '../../redux/actions';
+
 
 const cards = [
   {
@@ -65,6 +68,8 @@ class HomeScreen extends Component {
 
   render() {
     const { ret } = this.state;
+    // eslint-disable-next-line
+    const { counter, counterIncrementAsync } = this.props;
     return (
       <Container>
         {/* <Header /> */}
@@ -73,8 +78,14 @@ class HomeScreen extends Component {
             title="Go to MapBox"
             onPress={() => this.goMapBoxtest()}
           />
+          <Button
+            title="Increment"
+            onPress={() => counterIncrementAsync()}
+          />
         </View>
         <Text>{ret}</Text>
+        <Text>{counter}</Text>
+
         <View>
           <DeckSwiper
             dataSource={cards}
@@ -105,4 +116,6 @@ class HomeScreen extends Component {
   }
 }
 
-export default HomeScreen;
+const mapStateToProps = state => ({ counter: state });
+
+export default connect(mapStateToProps, { counterIncrementAsync })(HomeScreen);
