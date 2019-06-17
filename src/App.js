@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import store from './redux/store';
 import AppContainer from './navigator';
+import store from './models';
 
 export default class App extends Component {
   render() {

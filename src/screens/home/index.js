@@ -4,6 +4,7 @@ import { Image, Button } from 'react-native';
 import {
   Container, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Icon,
 } from 'native-base';
+import Stepper from '../../components/stepper';
 
 
 const cards = [
@@ -24,23 +25,14 @@ const cards = [
   },
 ];
 
+// define Props will cause vs-code check err
 class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ret: 'init value',
+      ret: 'loading...',
     };
   }
-
-  // fetchSth: () => {
-  //   api.testApi()
-  //     .then((res) => {
-  //       console.log('res', res);
-  //     })
-  //     .catch((err) => {
-  //       console.log('fetch err', err);
-  //     });
-  // }
 
   componentDidMount() {
     this.fetchSth();
@@ -62,7 +54,7 @@ class HomeScreen extends Component {
   goMapBoxtest() {
     // no better idea for now
     // eslint-disable-next-line
-    this.props.navigate.navigate('MapBox');
+    this.props.navigation.navigate('MapBox');
   }
 
   render() {
@@ -71,28 +63,29 @@ class HomeScreen extends Component {
     const { counter, dispatch } = this.props;
     return (
       <Container>
-        {/* <Header /> */}
-        <View>
+        <View style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+        >
+          <Stepper
+            style={{ width: gScreen.width / 2.5 }}
+            value={counter}
+            onValueChange={nv => dispatch({
+              type: 'counter/update',
+              payload: nv,
+            })}
+          />
           <Button
+            style={{ width: gScreen.width / 2.5 }}
             title="Go to MapBox"
             onPress={() => this.goMapBoxtest()}
           />
-          <Button
-            title="INCREMENT"
-            onPress={() => dispatch({ type: 'INCREMENT' })}
-          />
-          <Button
-            title="DECREMENT"
-            onPress={() => dispatch({ type: 'DECREMENT' })}
-          />
-          <Button
-            title="INCREMENT_ASYNC"
-            onPress={() => dispatch({ type: 'INCREMENT_ASYNC' })}
-          />
-        </View>
-        <Text>{ret}</Text>
-        <Text>{counter}</Text>
 
+        </View>
+        <Text>{`api ret: ${ret}`}</Text>
         <View>
           <DeckSwiper
             dataSource={cards}
@@ -123,6 +116,4 @@ class HomeScreen extends Component {
   }
 }
 
-const mapStateToProps = state => ({ counter: state });
-
-export default connect(mapStateToProps)(HomeScreen);
+export default connect(({ counter }) => ({ counter }))(HomeScreen);
