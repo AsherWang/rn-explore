@@ -20,7 +20,6 @@ global.$t = translate;
 // some glboal config
 global.$config = {
   mapBoxAccessToken: 'pk.eyJ1Ijoic291bHdyaXRlciIsImEiOiJjand1a3g3em0wMGl5NDhxdXhzcm1vbmJhIn0.vObzfKUO75-yZLQhydsksw',
-  // env: 'develop',
   env: 'prod',
   apiHost: 'https://test.writeyoursmile.com',
 };

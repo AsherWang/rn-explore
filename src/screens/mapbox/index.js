@@ -59,10 +59,13 @@ class MapBoxScreen extends React.Component {
             <MapboxGL.MapView
               showUserLocation
               style={{ flex: 1, height: mapHeight }}
+              // styleURL="mapbox://styles/mapbox/dark-v9"
             >
               <MapboxGL.Camera
                 centerCoordinate={[113.39921008865942, 23.167083344640833]}
                 zoomLevel={16}
+                // minZoomLevel={14}
+                maxZoomLevel={18}
               />
               <MapboxGL.UserLocation />
             </MapboxGL.MapView>

@@ -15,3 +15,23 @@ React Native explore
   - `react-redux`
 - ui components
   - `native-base`
+- some other toy
+  - `@react-native-mapbox-gl/maps`
+
+## project structure
+mainly in `src`  
+- api: http request
+- components: custom components being used across screens
+- i18n: internationalization config
+- models: manage glbal store
+- navigation: organize screens and handle router
+- screens: one page one screens
+- App.js: entrance
+- Global.js: define global variables like translate function or global config
+
+## builf
+run `yarn` and then `react-native run-android`  
+
+## note
+- to use `react-navigation` and `@react-native-mapbox-gl/maps` we should make some change in directory `android` and `ios`  
+- make sure you make the similar change in directory `ios` before you run  `react-native run-ios`  

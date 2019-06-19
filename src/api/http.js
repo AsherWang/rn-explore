@@ -4,11 +4,10 @@ const instance = axios.create({
   timeout: 5000,
 });
 
-instance.interceptors.request.use((config) => {
-  // eslint-disable-next-line no-param-reassign
-  config.baseURL = $config.apiHost;
-  return config;
-});
+instance.interceptors.request.use(config => ({
+  ...config,
+  baseURL: $config.apiHost,
+}));
 
 instance.interceptors.response.use((response) => {
   // Do something with response data
