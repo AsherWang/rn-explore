@@ -29,7 +29,7 @@ mainly in `src`
 - App.js: entrance
 - Global.js: define global variables like translate function or global config
 
-## builf
+## build
 run `yarn` and then `react-native run-android`  
 
 ## note
