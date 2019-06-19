@@ -2,6 +2,7 @@ module.exports = {
     'extends': 'airbnb',
     'parser': 'babel-eslint',
     'globals': {
+        '$config': 'readonly',
         '$t': 'readonly',
         'i18n': 'readonly',
         'api': 'readonly',
@@ -12,6 +13,7 @@ module.exports = {
         'global-require': [0],
         'no-console': [0],
         'react/jsx-filename-extension': [0],
-        'class-methods-use-this': [0]
+        'class-methods-use-this': [0],
+        'react/prop-types': [0],
     }
 };

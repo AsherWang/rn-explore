@@ -5,11 +5,12 @@ import {
   createAppContainer,
   createBottomTabNavigator,
 } from 'react-navigation';
-import React from 'react'; // require but don't know why
+import React from 'react';
 import { Icon } from 'native-base';
 import HomeScreen from '../screens/home';
 import MapBoxScreen from '../screens/mapbox';
 import UserInfo from '../screens/userinfo';
+import I18nPage from '../screens/i18n';
 import OtherScreen from '../screens/other';
 
 // basic use
@@ -68,27 +69,34 @@ const bottomTabNavigator = createBottomTabNavigator({
   Home: {
     screen: HomeScreen,
     navigationOptions: () => ({
-      title: '首页',
+      title: $t('home.title'),
       tabBarIcon: tabBarIconHelper('home'),
     }),
   },
   MapBox: {
     screen: MapBoxScreen,
     navigationOptions: () => ({
-      title: 'mapBox',
+      title: $t('map.title'),
       tabBarIcon: tabBarIconHelper('pin'),
+    }),
+  },
+  I18n: {
+    screen: I18nPage,
+    navigationOptions: () => ({
+      title: $t('i18n.title'),
+      tabBarIcon: tabBarIconHelper('color-wand'),
     }),
   },
   UserInfo: {
     screen: userInfoStack,
     navigationOptions: () => ({
-      title: 'UserInfo',
+      title: $t('userinfo.title'),
       tabBarIcon: tabBarIconHelper('happy'),
     }),
   },
 },
 {
-  initialRouteName: 'Home', // init tab
+  initialRouteName: 'Home', // init tab MapBox,Home
   tabBarOptions: {
     activeTintColor: 'tomato',
     inactiveTintColor: 'gray',
@@ -123,3 +131,6 @@ const AppNavigators = {
 };
 
 export default createAppContainer(AppNavigators.bottomTabNavigator);
+// export default connect(
+//   ({ app }) => ({ language: app.language }),
+// )(createAppContainer(AppNavigators.bottomTabNavigator));

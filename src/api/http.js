@@ -1,10 +1,14 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'https://test.writeyoursmile.com',
   timeout: 5000,
 });
 
+instance.interceptors.request.use((config) => {
+  // eslint-disable-next-line no-param-reassign
+  config.baseURL = $config.apiHost;
+  return config;
+});
 
 instance.interceptors.response.use((response) => {
   // Do something with response data

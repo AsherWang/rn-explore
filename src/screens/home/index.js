@@ -30,7 +30,9 @@ class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ret: 'loading...',
+      api1Result: 'loading...',
+      api2Result: 'loading...',
+      api3Result: 'loading...',
     };
   }
 
@@ -41,13 +43,30 @@ class HomeScreen extends Component {
   fetchSth() {
     api.testApi()
       .then((res) => {
-        console.log('res', res);
-        this.setState({
-          ret: res.data,
-        });
+        this.setState({ api1Result: res.data });
       })
       .catch((err) => {
-        console.log('fetch err', err);
+        this.setState({
+          api1Result: `fetch data err: ${err && err.message}`,
+        });
+      });
+    api.testApi2()
+      .then((res) => {
+        this.setState({ api2Result: res.data });
+      })
+      .catch((err) => {
+        this.setState({
+          api2Result: `fetch data err: ${err && err.message}`,
+        });
+      });
+    api.testApi404()
+      .then((res) => {
+        this.setState({ api3Result: res.data });
+      })
+      .catch((err) => {
+        this.setState({
+          api3Result: `fetch data err: ${err && err.message}`,
+        });
       });
   }
 
@@ -58,7 +77,7 @@ class HomeScreen extends Component {
   }
 
   render() {
-    const { ret } = this.state;
+    const { api1Result, api2Result, api3Result } = this.state;
     // eslint-disable-next-line
     const { counter, dispatch } = this.props;
     return (
@@ -85,7 +104,9 @@ class HomeScreen extends Component {
           />
 
         </View>
-        <Text>{`api ret: ${ret}`}</Text>
+        <Text>{`api1 ret: ${api1Result}`}</Text>
+        <Text>{`api2 ret: ${api2Result}`}</Text>
+        <Text>{`api3 ret: ${api3Result}`}</Text>
         <View>
           <DeckSwiper
             dataSource={cards}

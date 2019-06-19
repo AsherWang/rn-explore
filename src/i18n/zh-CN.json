@@ -1,3 +1,16 @@
 {
-    "hello": "你好世界!"
+    "hello": "你好世界!",
+    "i18n":{
+        "title": "国际化",
+        "lng":"语言设置"
+    },
+    "home":{
+        "title": "首頁"
+    },
+    "map":{
+        "title": "地图"
+    },
+    "userinfo":{
+        "title": "我的"
+    }
 }

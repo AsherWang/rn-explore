@@ -1,37 +1,74 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { Container, Content } from 'native-base';
+import { PermissionsAndroid, Alert, Platform } from 'react-native';
 import MapboxGL from '@react-native-mapbox-gl/maps';
 
-MapboxGL.setAccessToken('pk.eyJ1Ijoic291bHdyaXRlciIsImEiOiJjand1a3g3em0wMGl5NDhxdXhzcm1vbmJhIn0.vObzfKUO75-yZLQhydsksw');
-
-const styles = StyleSheet.create({
-  mapContainer: {
-    height: 400,
-    width: gScreen.width,
-    backgroundColor: 'tomato',
-  },
-  map: {
-    flex: 1,
-  },
-});
+MapboxGL.setAccessToken($config.mapBoxAccessToken);
 
 class MapBoxScreen extends React.Component {
+  state = {
+    mapHeight: 0,
+    permissionGet: false,
+  }
+
   componentDidMount() {
+    if (Platform.OS === 'android') {
+      // Calling the permission function
+      this.requestLocationPermission();
+    } else {
+      Alert.alert('IOS device found');
+    }
     MapboxGL.setTelemetryEnabled(false);
   }
 
+  // Checking for the permission just after component loaded
+  async requestLocationPermission() {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION, {
+          title: 'AndoridPermissionExample App Location Permission',
+          message: 'AndoridPermissionExample App needs access to your Location',
+        },
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        // To Check, If Permission is granted
+        this.setState({
+          permissionGet: true,
+        });
+      } else {
+        Alert.alert('CAMERA permission denied');
+      }
+    } catch (err) {
+      Alert.alert('err', err);
+      console.warn(err);
+    }
+  }
+
+
   render() {
+    const { mapHeight, permissionGet } = this.state;
     return (
-      <View style={{
-        flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start',
-      }}
-      >
-        <Text>MapBox Test Screen</Text>
-        <Text>{$t('hello')}</Text>
-        <View style={styles.mapContainer}>
-          <MapboxGL.MapView style={styles.map} />
-        </View>
-      </View>
+      <Container>
+        <Content
+          onLayout={(event) => {
+            const { height } = event.nativeEvent.layout;
+            this.setState({ mapHeight: height });
+          }}
+        >
+          {mapHeight > 0 && permissionGet && (
+            <MapboxGL.MapView
+              showUserLocation
+              style={{ flex: 1, height: mapHeight }}
+            >
+              <MapboxGL.Camera
+                centerCoordinate={[113.39921008865942, 23.167083344640833]}
+                zoomLevel={16}
+              />
+              <MapboxGL.UserLocation />
+            </MapboxGL.MapView>
+          )}
+        </Content>
+      </Container>
     );
   }
 }

@@ -1,11 +1,8 @@
 import { Dimensions } from 'react-native';
-import i18n, { translate, setI18nConfig } from './i18n';
+import { translate, setI18nConfig, supportedLanguages } from './i18n';
 import api from './api';
 
 const { width, height } = Dimensions.get('window');
-
-
-setI18nConfig(); // set proper language
 
 global.gScreen = {
   width,
@@ -15,7 +12,15 @@ global.gScreen = {
 global.api = api;
 
 global.i18n = {
-  i18n,
   setI18nConfig,
+  supportedLanguages,
 };
 global.$t = translate;
+
+// some glboal config
+global.$config = {
+  mapBoxAccessToken: 'pk.eyJ1Ijoic291bHdyaXRlciIsImEiOiJjand1a3g3em0wMGl5NDhxdXhzcm1vbmJhIn0.vObzfKUO75-yZLQhydsksw',
+  // env: 'develop',
+  env: 'prod',
+  apiHost: 'https://test.writeyoursmile.com',
+};

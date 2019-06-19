@@ -1,4 +1,5 @@
 {
     "eslint.autoFixOnSave": true,
-    "javascript.suggest.autoImports": false
+    "javascript.suggest.autoImports": false,
+    "editor.tabSize": 2
 }

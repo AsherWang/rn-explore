@@ -16,24 +16,34 @@ const translationGetters = {
   'zh-TW': () => require('./zh-TW.json'),
 };
 
+export const supportedLanguages = Object.keys(translationGetters);
 
-export const setI18nConfig = () => {
-  // fallback if no available language fits
-  const fallback = { languageTag: 'en', isRTL: false };
 
-  const targetLng = RNLocalize.findBestAvailableLanguage(Object.keys(translationGetters));
-  const { languageTag, isRTL } = targetLng || fallback;
+// language: e.g. en,zh-CN, auto set most fit language if omitted
+// ret language that actually applied
+export const setI18nConfig = (language) => {
+  let targetLng = null;
+  if (language && supportedLanguages.includes(language)) {
+    targetLng = {
+      languageTag: language,
+      isRTL: false,
+    };
+  } else {
+    // auto set
+    // fallback if no available language fits
+    const fallback = { languageTag: 'en', isRTL: false };
+    targetLng = RNLocalize.findBestAvailableLanguage(supportedLanguages) || fallback;
+  }
 
   // clear translation cache
   translate.cache.clear();
   // update layout direction
-  I18nManager.forceRTL(isRTL);
-
-  // console.log('languageTag', languageTag);
+  I18nManager.forceRTL(targetLng.isRTL);
 
   // set i18n-js config
-  i18n.translations = { [languageTag]: translationGetters[languageTag]() };
-  i18n.locale = languageTag;
+  i18n.translations = { [targetLng.languageTag]: translationGetters[targetLng.languageTag]() };
+  i18n.locale = targetLng.languageTag;
+  return targetLng.languageTag;
 };
 
 export default i18n;

@@ -1,13 +1,15 @@
 import { create } from 'dva-core';
 import products from './products';
 import counter from './counter';
+import app from './app';
 
-const app = create();
+const dva = create();
 
-app.model(products);
-app.model(counter);
+dva.model(products);
+dva.model(counter);
+dva.model(app);
 
-app.start();
+dva.start();
 
 // eslint-disable-next-line no-underscore-dangle
-export default app._store;
+export default dva._store;

@@ -1,3 +1,16 @@
 {
-    "hello": "Hello World!"
+    "hello": "Hello World!",
+    "i18n":{
+        "title": "i18n",
+        "lng":"Language Setting"
+    },
+    "home":{
+        "title": "Home"
+    },
+    "map":{
+        "title": "Map"
+    },
+    "userinfo":{
+        "title": "My"
+    }
 }
