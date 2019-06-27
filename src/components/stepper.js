@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { Button, Text, Icon } from 'native-base';
 import { View, StyleSheet } from 'react-native';
+import _throttle from 'lodash.throttle';
 
 const styles = StyleSheet.create({
   cont: {
@@ -20,29 +21,44 @@ const styles = StyleSheet.create({
 });
 
 class Stepper extends Component {
-  onValueChange(nv) {
-    const { onValueChange } = this.props;
-    if (onValueChange) {
-      onValueChange(nv);
-    }
+  constructor(props) {
+    super(props);
+    const { onValueChange, throttle } = props;
+    this.onValueChangeThrottled = _throttle((nv) => {
+      if (onValueChange) {
+        onValueChange(nv);
+      }
+    }, throttle, { trailing: false });
   }
 
   render() {
     const { value, style } = this.props;
     return (
       <View style={{ ...styles.cont, ...style }}>
-        <Button onPress={() => this.onValueChange(value - 1)} style={styles.btn}>
+        <Button
+          onPress={() => this.onValueChangeThrottled(value - 1)}
+          style={styles.btn}
+        >
           <Icon name="remove" />
         </Button>
         <View style={styles.text}>
           <Text>{value}</Text>
         </View>
-        <Button onPress={() => this.onValueChange(value + 1)} style={styles.btn}>
+        <Button
+          onPress={() => this.onValueChangeThrottled(value + 1)}
+          style={styles.btn}
+        >
           <Icon name="add" />
         </Button>
       </View>
     );
   }
 }
+
+Stepper.defaultProps = {
+  throttle: 100,
+  value: 0,
+  style: {},
+};
 
 export default Stepper;

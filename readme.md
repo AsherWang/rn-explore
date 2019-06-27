@@ -25,12 +25,12 @@ mainly in `src`
 - i18n: internationalization config
 - models: manage glbal store
 - navigation: organize screens and handle router
-- screens: one page one screens
+- screens: one page one screen
 - App.js: entrance
 - Global.js: define global variables like translate function or global config
 
 ## build
-run `yarn` and then `react-native run-android`  
+run `npm i` and then `react-native run-android`  
 
 ## note
 - to use `react-navigation` and `@react-native-mapbox-gl/maps` we should make some change in directory `android` and `ios`  

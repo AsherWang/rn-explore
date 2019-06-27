@@ -8,6 +8,9 @@ module.exports = {
         'api': 'readonly',
         'gScreen': 'readonly',
     },
+    'plugins': [
+        'react-hooks'
+    ],
     'rules': {
         'react/prefer-stateless-function': [0],
         'global-require': [0],
@@ -15,5 +18,7 @@ module.exports = {
         'react/jsx-filename-extension': [0],
         'class-methods-use-this': [0],
         'react/prop-types': [0],
+        'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/exhaustive-deps': 'warn'
     }
 };

@@ -1,33 +1,19 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Provider } from 'react-redux';
 import AppContainer from './navigator';
 import store from './models';
 
-const currentLocale = i18n.setI18nConfig();
-// console.log(`auto set locale ${currentLocale}`);
-// todo: save currentLanguage to store
-// console.log('store', store);
+const initLocale = i18n.setI18nConfig();
 
-export default class App extends Component {
-  state = {
-    locale: currentLocale,
+export default function App() {
+  const [locale, setRealLocale] = useState(initLocale);
+  const setLocale = (newLocale) => {
+    const ret = i18n.setI18nConfig(newLocale);
+    setRealLocale(ret);
   };
-
-  setLocale = (locale) => {
-    const ret = i18n.setI18nConfig(locale);
-    this.setState({ locale: ret });
-  };
-
-  render() {
-    const { locale } = this.state;
-    return (
-      <Provider store={store}>
-        <AppContainer screenProps={{
-          locale,
-          setLocale: this.setLocale,
-        }}
-        />
-      </Provider>
-    );
-  }
+  return (
+    <Provider store={store}>
+      <AppContainer screenProps={{ locale, setLocale }} />
+    </Provider>
+  );
 }
