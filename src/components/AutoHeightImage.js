@@ -3,11 +3,10 @@ import { Image } from 'react-native';
 import { Content } from 'native-base';
 import PropTypes from 'prop-types';
 
-function AutoHeightImage({ source, customStyle }) {
+function AutoHeightImage({ source, style }) {
   const [realHeight, setRealHeight] = useState(100);
   const [realWidth, setRealWidth] = useState(100);
   const [targetWidth, setTargetWidth] = useState(gScreen.width);
-
 
   useEffect(() => {
     const setSize = (width, height) => {
@@ -19,7 +18,6 @@ function AutoHeightImage({ source, customStyle }) {
     // for source with require image from local, it is a number
     if (Number.isInteger(source)) {
       const { width, height } = Image.resolveAssetSource(source);
-      console.log(`get size ${width}x${height}`);
       setSize(width, height);
     } else {
       Image.getSize(source, (width, height) => {
@@ -38,7 +36,7 @@ function AutoHeightImage({ source, customStyle }) {
           setTargetWidth(tWidth);
         }
       }}
-      style={{ ...customStyle }}
+      style={style}
     >
       <Image
         source={source}
@@ -54,11 +52,11 @@ AutoHeightImage.propTypes = {
     PropTypes.string,
   ]).isRequired,
   // eslint-disable-next-line react/forbid-prop-types
-  customStyle: PropTypes.object,
+  style: PropTypes.object,
 };
 
 AutoHeightImage.defaultProps = {
-  customStyle: {},
+  style: {},
 };
 
 export default AutoHeightImage;

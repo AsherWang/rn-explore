@@ -1,9 +1,8 @@
-/* eslint-disable react/prop-types */
-
 import React, { useCallback } from 'react';
 import { Button, Text, Icon } from 'native-base';
 import { View, StyleSheet } from 'react-native';
 import _throttle from 'lodash.throttle';
+import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
   cont: {
@@ -20,11 +19,9 @@ const styles = StyleSheet.create({
   },
 });
 
-function Stepper(props) {
-  const {
-    onValueChange, throttle, value, style,
-  } = props;
-
+function Stepper({
+  onValueChange, throttle, value, style,
+}) {
   const onValueChangeThrottled = useCallback(
     _throttle((nv) => {
       if (onValueChange) {
@@ -33,7 +30,6 @@ function Stepper(props) {
     }, throttle, { trailing: false }),
     [throttle],
   );
-
   return (
     <View style={{ ...styles.cont, ...style }}>
       <Button
@@ -55,9 +51,15 @@ function Stepper(props) {
   );
 }
 
+Stepper.propTypes = {
+  throttle: PropTypes.number,
+  value: PropTypes.number.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  style: PropTypes.object,
+};
+
 Stepper.defaultProps = {
   throttle: 100,
-  value: 0,
   style: {},
 };
 

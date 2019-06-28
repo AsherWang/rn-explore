@@ -1,9 +1,9 @@
-/* eslint-disable react/prop-types */
 import {
   createStackNavigator,
   createDrawerNavigator,
   createAppContainer,
   createBottomTabNavigator,
+  BottomTabBar,
 } from 'react-navigation';
 import React from 'react';
 import { Icon } from 'native-base';
@@ -65,6 +65,8 @@ const tabBarIconHelper = icon => ({
   tintColor,
 }) => <Icon name={icon} style={{ color: tintColor }} />;
 
+const TabBarComponent = props => (<BottomTabBar {...props} />);
+
 const bottomTabNavigator = createBottomTabNavigator({
   Home: {
     screen: HomeScreen,
@@ -101,6 +103,12 @@ const bottomTabNavigator = createBottomTabNavigator({
     activeTintColor: 'tomato',
     inactiveTintColor: 'gray',
   },
+  tabBarComponent: props => (
+    <TabBarComponent
+      {...props}
+      style={{ borderTopColor: '#efefef' }}
+    />
+  ),
 });
 
 
