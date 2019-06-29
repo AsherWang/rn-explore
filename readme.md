@@ -30,7 +30,7 @@ mainly in `src`
 - Global.js: define global variables like translate function or global config
 
 ## build
-run `npm i` and then `react-native run-android`  
+run `yarn` and then `react-native run-android`  
 
 ## note
 - to use `react-navigation` and `@react-native-mapbox-gl/maps` we should make some change in directory `android` and `ios`  

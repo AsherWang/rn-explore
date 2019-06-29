@@ -56,7 +56,6 @@ function MapBoxScreen() {
           <MapboxGL.MapView
             showUserLocation
             style={{ flex: 1, height: mapHeight }}
-            // styleURL="mapbox://styles/mapbox/dark-v9"
           >
             <MapboxGL.Camera
               centerCoordinate={[113.39921008865942, 23.167083344640833]}

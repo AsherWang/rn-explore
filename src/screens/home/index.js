@@ -5,13 +5,11 @@ import {
   Container, Card, CardItem, Text, Body, Button, Content, Thumbnail, Left, Icon,
 } from 'native-base';
 
-// tried package babel-plugin-module-resolver and failed
+// tried package babel-plugin-module-resolver but failed :(
 import Stepper from '../../components/Stepper';
 import AutoHeightImage from '../../components/AutoHeightImage';
 
 const imageSrc = require('./test.jpg');
-
-let count = 0;
 
 // define Props will cause vs-code check err
 function HomeScreen({ counter, dispatch, navigation }) {
@@ -30,8 +28,6 @@ function HomeScreen({ counter, dispatch, navigation }) {
       .then(({ data }) => setApi3Result(data))
       .catch(err => setApi3Result(`fetch data err: ${err && err.message}`));
   }, []);
-  count += 1;
-  console.log(`homescreen render count: ${count}`);
   return (
     <Container>
       <Content>

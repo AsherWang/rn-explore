@@ -1,0 +1,124 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<RCTScrollView
+  DEPRECATED_sendUpdatedChildFrames={false}
+  alwaysBounceVertical={true}
+  automaticallyAdjustContentInsets={false}
+  contentContainerStyle={
+    Array [
+      Object {
+        "padding": undefined,
+      },
+      undefined,
+    ]
+  }
+  contentInset={
+    Object {
+      "bottom": 0,
+    }
+  }
+  enableAutomaticScroll={true}
+  enableOnAndroid={false}
+  enableResetScrollToCoords={true}
+  extraHeight={75}
+  extraScrollHeight={0}
+  getScrollResponder={[Function]}
+  handleOnScroll={[Function]}
+  keyboardDismissMode="interactive"
+  keyboardOpeningTime={250}
+  keyboardShouldPersistTaps="handled"
+  keyboardSpace={0}
+  onContentSizeChange={null}
+  onLayout={[Function]}
+  onMomentumScrollBegin={[Function]}
+  onMomentumScrollEnd={[Function]}
+  onResponderGrant={[Function]}
+  onResponderReject={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onScroll={[Function]}
+  onScrollBeginDrag={[Function]}
+  onScrollEndDrag={[Function]}
+  onScrollShouldSetResponder={[Function]}
+  onStartShouldSetResponder={[Function]}
+  onStartShouldSetResponderCapture={[Function]}
+  onTouchCancel={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  resetKeyboardSpace={[Function]}
+  resetScrollToCoords={
+    Object {
+      "x": 0,
+      "y": 0,
+    }
+  }
+  scrollBarThumbImage={
+    Object {
+      "uri": "asset://test.png",
+    }
+  }
+  scrollEventThrottle={1}
+  scrollForExtraHeightOnAndroid={[Function]}
+  scrollIntoView={[Function]}
+  scrollToEnd={[Function]}
+  scrollToFocusedInput={[Function]}
+  scrollToPosition={[Function]}
+  sendMomentumEvents={false}
+  showsVerticalScrollIndicator={true}
+  snapToEnd={true}
+  snapToStart={true}
+  style={
+    Array [
+      Object {
+        "flexDirection": "column",
+        "flexGrow": 1,
+        "flexShrink": 1,
+        "overflow": "scroll",
+      },
+      Array [
+        Object {
+          "backgroundColor": "transparent",
+          "flex": 1,
+        },
+        Object {
+          "height": 300,
+          "width": 200,
+        },
+      ],
+    ]
+  }
+  update={[Function]}
+  viewIsInsideTabBar={false}
+>
+  <RCTScrollContentView
+    collapsable={false}
+    style={
+      Array [
+        undefined,
+        Array [
+          Object {
+            "padding": undefined,
+          },
+          undefined,
+        ],
+      ]
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../__tests__/test.jpg",
+        }
+      }
+      style={
+        Object {
+          "height": 100,
+          "width": 100,
+        }
+      }
+    />
+  </RCTScrollContentView>
+</RCTScrollView>
+`;

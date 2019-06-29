@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Provider } from 'react-redux';
+import './Global'; // set global variables and init i18n
 import AppContainer from './navigator';
 import store from './models';
 

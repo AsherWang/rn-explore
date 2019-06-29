@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 function AutoHeightImage({ source, style }) {
   const [realHeight, setRealHeight] = useState(100);
   const [realWidth, setRealWidth] = useState(100);
-  const [targetWidth, setTargetWidth] = useState(gScreen.width);
+  const [targetWidth, setTargetWidth] = useState(100);
 
   useEffect(() => {
     const setSize = (width, height) => {
@@ -20,7 +20,7 @@ function AutoHeightImage({ source, style }) {
       const { width, height } = Image.resolveAssetSource(source);
       setSize(width, height);
     } else {
-      Image.getSize(source, (width, height) => {
+      Image.getSize(source.uri, (width, height) => {
         setSize(width, height);
       });
     }
@@ -49,7 +49,7 @@ function AutoHeightImage({ source, style }) {
 AutoHeightImage.propTypes = {
   source: PropTypes.oneOfType([
     PropTypes.number,
-    PropTypes.string,
+    PropTypes.objectOf(PropTypes.string), // then how to define a type like {uri:string}
   ]).isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   style: PropTypes.object,
