@@ -32,6 +32,9 @@ mainly in `src`
 ## build
 run `yarn` and then `react-native run-android`  
 
+## release android
+`react-native run-android --variant=release`
+
 ## note
 - to use `react-navigation` and `@react-native-mapbox-gl/maps` we should make some change in directory `android` and `ios`  
 - make sure you make the similar change in directory `ios` before you run  `react-native run-ios`  

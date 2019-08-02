@@ -1,8 +1,8 @@
 import {
   createStackNavigator,
-  createDrawerNavigator,
   createAppContainer,
   createBottomTabNavigator,
+  createSwitchNavigator,
   BottomTabBar,
 } from 'react-navigation';
 import React from 'react';
@@ -12,6 +12,8 @@ import MapBoxScreen from '../screens/mapbox';
 import UserInfo from '../screens/userinfo';
 import I18nPage from '../screens/i18n';
 import OtherScreen from '../screens/other';
+import LoginScreen from '../screens/login';
+// so these page doesn't look as simple as i expect it to be
 
 // basic use
 const stackNavigator = createStackNavigator({
@@ -35,7 +37,6 @@ const stackNavigator = createStackNavigator({
 });
 
 // tabbar
-
 const userInfoStack = createStackNavigator({
   UserInfoHome: {
     screen: UserInfo,
@@ -111,34 +112,25 @@ const bottomTabNavigator = createBottomTabNavigator({
   ),
 });
 
+const AuthStack = createStackNavigator({ SignIn: LoginScreen });
 
-// drawer navigator
-// 左侧可以划出浮层页面，内容为配置好的页面列表，点击列表项进入对应页面
-const drawerNavigator = createDrawerNavigator({
-  Home: {
-    screen: HomeScreen,
-    navigationOptions: () => ({
-      title: $t('hello'),
-      headerBackTitle: null,
-    }),
-  },
-  MapBox: {
-    screen: MapBoxScreen,
-    navigationOptions: () => ({
-      title: 'mapBox Test',
-      headerBackTitle: null,
-    }),
-  },
-});
-
-// actually we just need one of them
 const AppNavigators = {
   stackNavigator,
   bottomTabNavigator,
-  drawerNavigator,
 };
 
-export default createAppContainer(AppNavigators.bottomTabNavigator);
+// export default createAppContainer(AppNavigators.bottomTabNavigator);
+export default createAppContainer(createSwitchNavigator(
+  {
+    // AuthLoading: AuthLoadingScreen,
+    App: AppNavigators.bottomTabNavigator,
+    Auth: AuthStack,
+  },
+  {
+    // initialRouteName: 'AuthLoading',
+    initialRouteName: 'Auth',
+  },
+));
 // export default connect(
 //   ({ app }) => ({ language: app.language }),
 // )(createAppContainer(AppNavigators.bottomTabNavigator));
